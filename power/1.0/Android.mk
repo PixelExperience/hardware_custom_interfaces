@@ -28,7 +28,7 @@ $(GEN): PRIVATE_CUSTOM_TOOL = \
         $(PRIVATE_HIDL) -o $(PRIVATE_OUTPUT_DIR) \
         -Ljava \
         -randroid.hidl:system/libhidl/transport \
-        -rvendor.lineage:hardware/lineage/interfaces \
+        -rvendor.lineage:hardware/custom-interfaces \
         vendor.lineage.power@1.0::types.LineageFeature
 
 $(GEN): $(LOCAL_PATH)/types.hal
@@ -47,7 +47,7 @@ $(GEN): PRIVATE_CUSTOM_TOOL = \
         $(PRIVATE_HIDL) -o $(PRIVATE_OUTPUT_DIR) \
         -Ljava \
         -randroid.hidl:system/libhidl/transport \
-        -rvendor.lineage:hardware/lineage/interfaces \
+        -rvendor.lineage:hardware/custom-interfaces \
         vendor.lineage.power@1.0::types.LineagePowerHint
 
 $(GEN): $(LOCAL_PATH)/types.hal
@@ -68,7 +68,7 @@ $(GEN): PRIVATE_CUSTOM_TOOL = \
         $(PRIVATE_HIDL) -o $(PRIVATE_OUTPUT_DIR) \
         -Ljava \
         -randroid.hidl:system/libhidl/transport \
-        -rvendor.lineage:hardware/lineage/interfaces \
+        -rvendor.lineage:hardware/custom-interfaces \
         vendor.lineage.power@1.0::ILineagePower
 
 $(GEN): $(LOCAL_PATH)/ILineagePower.hal
@@ -103,7 +103,7 @@ $(GEN): PRIVATE_CUSTOM_TOOL = \
         $(PRIVATE_HIDL) -o $(PRIVATE_OUTPUT_DIR) \
         -Ljava \
         -randroid.hidl:system/libhidl/transport \
-        -rvendor.lineage:hardware/lineage/interfaces \
+        -rvendor.lineage:hardware/custom-interfaces \
         vendor.lineage.power@1.0::types.LineageFeature
 
 $(GEN): $(LOCAL_PATH)/types.hal
@@ -122,7 +122,7 @@ $(GEN): PRIVATE_CUSTOM_TOOL = \
         $(PRIVATE_HIDL) -o $(PRIVATE_OUTPUT_DIR) \
         -Ljava \
         -randroid.hidl:system/libhidl/transport \
-        -rvendor.lineage:hardware/lineage/interfaces \
+        -rvendor.lineage:hardware/custom-interfaces \
         vendor.lineage.power@1.0::types.LineagePowerHint
 
 $(GEN): $(LOCAL_PATH)/types.hal
@@ -143,7 +143,7 @@ $(GEN): PRIVATE_CUSTOM_TOOL = \
         $(PRIVATE_HIDL) -o $(PRIVATE_OUTPUT_DIR) \
         -Ljava \
         -randroid.hidl:system/libhidl/transport \
-        -rvendor.lineage:hardware/lineage/interfaces \
+        -rvendor.lineage:hardware/custom-interfaces \
         vendor.lineage.power@1.0::ILineagePower
 
 $(GEN): $(LOCAL_PATH)/ILineagePower.hal

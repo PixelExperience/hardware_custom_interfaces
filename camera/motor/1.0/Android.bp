@@ -1,0 +1,10 @@
+hidl_interface {
+    name: "vendor.lineage.camera.motor@1.0",
+    root: "vendor.lineage",
+    srcs: [
+        "ICameraMotor.hal",
+    ],
+    interfaces: [
+        "android.hidl.base@1.0",
+    ],
+}

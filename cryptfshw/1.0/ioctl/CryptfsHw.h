@@ -16,6 +16,10 @@
 
 #pragma once
 
+#define LOG_TAG "vendor.qti.hardware.cryptfshw@1.0-service-ioctl-qti"
+
+#include <android-base/logging.h>
+
 #include <hidl/MQDescriptor.h>
 #include <hidl/Status.h>
 #include <vendor/qti/hardware/cryptfshw/1.0/ICryptfsHw.h>
@@ -27,24 +31,17 @@ namespace cryptfshw {
 namespace V1_0 {
 namespace ioctl_qti {
 
-using ::android::sp;
-using ::android::hardware::hidl_array;
-using ::android::hardware::hidl_memory;
 using ::android::hardware::hidl_string;
-using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
-using ::android::hardware::Void;
 
-#define QTI_ICE_STORAGE_NOT -1
-#define QTI_ICE_STORAGE_UFS 1
-#define QTI_ICE_STORAGE_SDCC 2
-
+// All error codes we return
 #define CRYPTFS_HW_KMS_WIPE_KEY 1
 #define CRYPTFS_HW_CREATE_KEY_FAILED -7
 #define CRYPTFS_HW_WIPE_KEY_FAILED -8
 #define CRYPTFS_HW_UPDATE_KEY_FAILED -9
 #define CRYPTFS_HW_KMS_MAX_FAILURE -10
 
+// Usage constants for the backend based on the device's storage type
 enum cryptfs_hw_key_management_usage_type {
     CRYPTFS_HW_KM_USAGE_DISK_ENCRYPTION = 0x01,
     CRYPTFS_HW_KM_USAGE_FILE_ENCRYPTION = 0x02,
@@ -59,13 +56,13 @@ class CryptfsHw : public ICryptfsHw {
 
     // Methods from ::vendor::qti::hardware::cryptfshw::V1_0::ICryptfsHw follow.
     Return<int32_t> setIceParam(uint32_t flag) override;
-    Return<int32_t> setKey(const hidl_string& passwd, const hidl_string&) override;
+    Return<int32_t> setKey(const hidl_string& passwd, const hidl_string& enc_mode) override;
     Return<int32_t> updateKey(const hidl_string& oldpw, const hidl_string& newpw,
-                              const hidl_string&) override;
+                              const hidl_string& enc_mode) override;
     Return<int32_t> clearKey() override;
 
    private:
-    int mStorageType;
+    qseecom_key_management_usage_type mKeyManagementUsage;
 };
 
 }  // namespace ioctl_qti

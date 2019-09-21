@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "vendor.qti.hardware.cryptfshw@1.0-service-ioctl-qti"
-
-#include <android-base/logging.h>
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
 

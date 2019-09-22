@@ -19,10 +19,8 @@
 
 #include <dlfcn.h>
 
-#define LOG_TAG "vendor.qti.hardware.cryptfshw@1.0-service-dlsym-qti"
-
-#include <android-base/logging.h>
 #include <android-base/properties.h>
+
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
 

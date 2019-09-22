@@ -16,6 +16,7 @@ cc_binary {
     name: "vendor.qti.hardware.cryptfshw@1.0-service-dlsym-qti",
     defaults: ["hidl_defaults"],
     init_rc: ["vendor.qti.hardware.cryptfshw@1.0-service-dlsym-qti.rc"],
+    header_libs: ["generated_kernel_headers"],
     owner: "qti",
     product_variables: {
         aosp: {

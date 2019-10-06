@@ -14,28 +14,45 @@
  * limitations under the License.
  */
 
-#include <binder/ProcessState.h>
+#ifndef CRYPTFS_HW_BACKEND
+#error "CRYPTFS_HW_BACKEND must be set before including this file."
+#endif
+
+#include <android-base/logging.h>
 #include <hidl/HidlTransportSupport.h>
 
-#include "CryptfsHw.h"
+#ifdef ARCH_ARM_32
+#include <hwbinder/ProcessState.h>
+#endif
 
-using android::OK;
-using android::sp;
-using android::status_t;
-using android::hardware::configureRpcThreadpool;
-using android::hardware::joinRpcThreadpool;
+#include <CryptfsHw.h>
 
-using ::vendor::qti::hardware::cryptfshw::V1_0::ICryptfsHw;
-using ::vendor::qti::hardware::cryptfshw::V1_0::ioctl_qti::CryptfsHw;
+using ::android::OK;
+using ::android::sp;
+using ::android::status_t;
+using ::android::hardware::configureRpcThreadpool;
+using ::android::hardware::joinRpcThreadpool;
+
+using ::vendor::qti::hardware::cryptfshw::V1_0::implementation::CryptfsHw;
+using ::vendor::qti::hardware::cryptfshw::V1_0::implementation::ICryptfsHwController;
+using ::vendor::qti::hardware::cryptfshw::V1_0::implementation::CRYPTFS_HW_BACKEND::Controller;
 
 int main() {
-    sp<CryptfsHw> cryptfsHw;
+#ifdef ARCH_ARM_32
+    android::hardware::ProcessState::initWithMmapSize((size_t)16384);
+#endif
 
+    sp<CryptfsHw> cryptfsHw;
     status_t status = OK;
 
-    LOG(INFO) << "CryptfsHw HAL service is starting.";
+    LOG(DEBUG) << "CryptfsHw HAL service is starting.";
 
-    cryptfsHw = new CryptfsHw();
+    auto controller = std::make_unique<Controller>();
+    if (controller == nullptr) {
+        goto shutdown;
+    }
+
+    cryptfsHw = new CryptfsHw(std::move(controller));
     if (cryptfsHw == nullptr) {
         LOG(ERROR) << "Can not create an instance of CryptfsHw HAL CryptfsHw Iface, exiting.";
         goto shutdown;
@@ -50,7 +67,7 @@ int main() {
         goto shutdown;
     }
 
-    LOG(INFO) << "CryptfsHw HAL service is ready.";
+    LOG(DEBUG) << "CryptfsHw HAL service is ready.";
     joinRpcThreadpool();
     // Should not pass this line
 

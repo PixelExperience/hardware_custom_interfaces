@@ -85,4 +85,9 @@ interface IFingerprintInscreen {
      * called by the HAL whenever there is a finger up/down event.
      */
     oneway setCallback(IFingerprintInscreenCallback callback);
+
+    /**
+     * WIP
+     */
+    switchHbm(bool enabled);
 };

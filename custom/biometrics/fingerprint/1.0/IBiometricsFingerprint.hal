@@ -3,4 +3,13 @@ package org.pixelexperience.biometrics.fingerprint@1.0;
 import android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint;
 
 interface IBiometricsFingerprint extends android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint {
+    /**
+     * Called when an Udfps overlay is shown
+     */
+    onShowUdfpsOverlay();
+
+    /**
+     * Called when an Udfps overlay is hidden
+     */
+    onHideUdfpsOverlay();
 };
